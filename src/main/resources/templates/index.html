@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Unit Converter</title>
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Unit Converter</h1>
+        <p>
+            Convert between different units quickly and accurately.
+        </p>
+
+        <div class="menu">
+
+            <a th:href="@{length}">
+                Length Converter
+            </a>
+            <a href="#">
+                Weight Converter
+            </a>
+            <a href="#">
+                Temperature Converter
+            </a>
+        </div>
+    </div>
+
+
+</body>
+</html>
