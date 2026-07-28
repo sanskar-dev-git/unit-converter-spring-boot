@@ -4,10 +4,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Length Converter</title>
 
-    <link rel="stylesheet"
-          th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -16,15 +17,76 @@
 
     <h1>Length Converter</h1>
 
-    <p>
-        This page is working successfully.
-    </p>
+    <form th:action="@{/length}"
+          th:object="${request}"
+          method="post">
 
-    <h2>Sample Conversion</h2>
+        <label for="value">Value</label>
+        <input
+                id="value"
+                type="number"
+                th:field="*{value}"
+                step="any"
+                required>
 
-    <p>
-        1 Kilometer = 1000 Meters
-    </p>
+        <br><br>
+
+        <label for="from">From</label>
+        <select id="from" th:field="*{from}">
+
+            <option value="mm">Millimeter</option>
+            <option value="cm">Centimeter</option>
+            <option value="m">Meter</option>
+            <option value="km">Kilometer</option>
+            <option value="inch">Inch</option>
+            <option value="foot">Foot</option>
+            <option value="yard">Yard</option>
+            <option value="mile">Mile</option>
+
+        </select>
+
+        <br><br>
+
+        <label for="to">To</label>
+        <select id="to" th:field="*{to}">
+
+            <option value="mm">Millimeter</option>
+            <option value="cm">Centimeter</option>
+            <option value="m">Meter</option>
+            <option value="km">Kilometer</option>
+            <option value="inch">Inch</option>
+            <option value="foot">Foot</option>
+            <option value="yard">Yard</option>
+            <option value="mile">Mile</option>
+
+        </select>
+
+        <br><br>
+
+        <button type="submit">
+            Convert
+        </button>
+
+    </form>
+
+    <br>
+
+    <!-- Result Section -->
+    <div th:if="${result != null}">
+
+        <h2>Result</h2>
+
+        <p>
+            <span th:text="${request.value}"></span>
+            <span th:text="${request.from}"></span>
+            =
+            <strong th:text="${result}"></strong>
+            <span th:text="${request.to}"></span>
+        </p>
+
+    </div>
+
+    <br>
 
     <a th:href="@{/}">
         ← Back to Home
