@@ -164,6 +164,28 @@ public class UnitFormatter {
 
             case "week":
                 return "Week";
+
+            // ==========================
+// Data Storage Units
+// ==========================
+
+            case "bit":
+                return "Bit";
+
+            case "byte":
+                return "Byte";
+
+            case "kb":
+                return "Kilobyte";
+
+            case "mb":
+                return "Megabyte";
+
+            case "gb":
+                return "Gigabyte";
+
+            case "tb":
+                return "Terabyte";
             default:
                 return unit;
 

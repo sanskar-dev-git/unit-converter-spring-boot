@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.sanskar.unitconverter.model.TimeConversionRequest;
+import com.sanskar.unitconverter.model.DataStorageConversionRequest;
 
 import java.text.DecimalFormat;
 
@@ -270,5 +271,40 @@ public class HomeController {
                 UnitFormatter.format(request.getTo()));
 
         return "time";
+    }
+    // ==========================
+// Data Storage Converter
+// ==========================
+
+    @GetMapping("/datastorage")
+    public String dataStorage(Model model) {
+
+        model.addAttribute("request", new DataStorageConversionRequest());
+
+        return "datastorage";
+    }
+
+    @PostMapping("/datastorage")
+    public String convertDataStorage(
+            @ModelAttribute("request") DataStorageConversionRequest request,
+            Model model) {
+
+        double convertedValue = unitConversionService.convertDataStorage(
+                request.getValue(),
+                request.getFrom(),
+                request.getTo());
+
+        model.addAttribute("request", request);
+
+        model.addAttribute("result",
+                df.format(convertedValue));
+
+        model.addAttribute("fromUnit",
+                UnitFormatter.format(request.getFrom()));
+
+        model.addAttribute("toUnit",
+                UnitFormatter.format(request.getTo()));
+
+        return "datastorage";
     }
 }

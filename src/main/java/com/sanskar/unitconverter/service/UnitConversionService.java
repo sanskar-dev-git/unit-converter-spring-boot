@@ -471,4 +471,72 @@ public class UnitConversionService {
                 throw new IllegalArgumentException("Invalid time unit");
         }
     }
+    // ==========================
+// Data Storage Converter
+// ==========================
+
+    public double convertDataStorage(double value,
+                                     String from,
+                                     String to) {
+
+        double bytes = convertToBytes(value, from);
+
+        return round(convertFromBytes(bytes, to));
+    }
+
+    private double convertToBytes(double value,
+                                  String unit) {
+
+        switch (unit) {
+
+            case "bit":
+                return value / 8;
+
+            case "byte":
+                return value;
+
+            case "kb":
+                return value * 1024;
+
+            case "mb":
+                return value * 1024 * 1024;
+
+            case "gb":
+                return value * 1024 * 1024 * 1024;
+
+            case "tb":
+                return value * 1024 * 1024 * 1024 * 1024L;
+
+            default:
+                throw new IllegalArgumentException("Invalid data storage unit");
+        }
+    }
+
+    private double convertFromBytes(double bytes,
+                                    String unit) {
+
+        switch (unit) {
+
+            case "bit":
+                return bytes * 8;
+
+            case "byte":
+                return bytes;
+
+            case "kb":
+                return bytes / 1024;
+
+            case "mb":
+                return bytes / (1024 * 1024);
+
+            case "gb":
+                return bytes / (1024 * 1024 * 1024);
+
+            case "tb":
+                return bytes / (1024.0 * 1024 * 1024 * 1024);
+
+            default:
+                throw new IllegalArgumentException("Invalid data storage unit");
+        }
+    }
 }
