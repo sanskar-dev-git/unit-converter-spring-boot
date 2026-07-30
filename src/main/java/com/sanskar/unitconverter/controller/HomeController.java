@@ -2,13 +2,18 @@ package com.sanskar.unitconverter.controller;
 
 import com.sanskar.unitconverter.model.LengthConversionRequest;
 import com.sanskar.unitconverter.service.UnitConversionService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import com.sanskar.unitconverter.util.UnitFormatter;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+
+import com.sanskar.unitconverter.model.WeightConversionRequest;
+import java.text.DecimalFormat;
 
 @Controller
 public class HomeController {
@@ -17,12 +22,15 @@ public class HomeController {
     private UnitConversionService unitConversionService;
 
     @GetMapping("/")
-    public String home(){
+    public String home() {
         return "index";
     }
+
     @GetMapping("/length")
     public String length(Model model) {
+
         model.addAttribute("request", new LengthConversionRequest());
+
         return "length";
     }
 
@@ -30,14 +38,34 @@ public class HomeController {
     public String convertLength(
             @ModelAttribute("request") LengthConversionRequest request,
             Model model) {
-            double result = unitConversionService.convertingLength(
-                    request.getValue(),
-                    request.getFrom(),
-                    request.getTo());
 
-            model.addAttribute("request", request);
-            model.addAttribute("result", result);
-            return "length";
+        double convertedValue = unitConversionService.convertingLength(
+                request.getValue(),
+                request.getFrom(),
+                request.getTo());
 
+        DecimalFormat df = new DecimalFormat("#.#####");
+
+        model.addAttribute("request", request);
+
+        // Numerical result
+        model.addAttribute("result", df.format(convertedValue));
+
+        // Unit names
+        model.addAttribute("fromUnit",
+                UnitFormatter.format(request.getFrom()));
+
+        model.addAttribute("toUnit",
+                UnitFormatter.format(request.getTo()));
+
+        return "length";
+    }
+
+    @GetMapping("/weight")
+    public String weight(Model model) {
+
+        model.addAttribute("request", new WeightConversionRequest());
+
+        return "weight";
     }
 }

@@ -90,3 +90,18 @@ p{
     background:#2c80b4;
 
 }
+
+.result {
+    margin-top: 25px;
+    padding: 15px;
+
+    background: #e8f5e9;
+
+    border-radius: 8px;
+
+    color: #2e7d32;
+
+    font-size: 22px;
+
+    font-weight: bold;
+}

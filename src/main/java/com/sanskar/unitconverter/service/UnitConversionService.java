@@ -8,7 +8,12 @@ public class UnitConversionService {
     public double convertingLength(double value, String from, String to){
 
         double metres = convertToMetres(value, from);
-        return convertFromMetres(metres, to);
+        double result = convertFromMetres(metres, to);
+        return round(result);
+    }
+
+    private double round(double value) {
+        return Math.round(value * 100000.0) / 100000.0;
     }
 
     private double convertToMetres(double value, String unit) {
@@ -73,6 +78,5 @@ public class UnitConversionService {
                 throw new IllegalArgumentException("Invalid Unit");
         }
     }
-
-
 }
+

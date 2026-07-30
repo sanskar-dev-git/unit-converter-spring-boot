@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Length Converter</title>
+    <title>Weight Converter</title>
 
     <link rel="stylesheet"
           th:href="@{/css/style.css}">
@@ -16,13 +16,14 @@
 
 <div class="container">
 
-    <h1>Length Converter</h1>
+    <h1>Weight Converter</h1>
 
-    <form th:action="@{/length}"
+    <form th:action="@{/weight}"
           th:object="${request}"
           method="post">
 
         <label for="value">Value</label>
+
         <input
                 id="value"
                 type="number"
@@ -34,30 +35,32 @@
 
         <label for="from">From</label>
 
-        <select id="from" th:field="*{from}">
-            <option value="mm">Millimeter</option>
-            <option value="cm">Centimeter</option>
-            <option value="m">Meter</option>
-            <option value="km">Kilometer</option>
-            <option value="inch">Inch</option>
-            <option value="foot">Foot</option>
-            <option value="yard">Yard</option>
-            <option value="mile">Mile</option>
+        <select id="from"
+                th:field="*{from}">
+
+            <option value="mg">Milligram</option>
+            <option value="g">Gram</option>
+            <option value="kg">Kilogram</option>
+            <option value="ton">Ton</option>
+            <option value="oz">Ounce</option>
+            <option value="lb">Pound</option>
+
         </select>
 
         <br><br>
 
         <label for="to">To</label>
 
-        <select id="to" th:field="*{to}">
-            <option value="mm">Millimeter</option>
-            <option value="cm">Centimeter</option>
-            <option value="m">Meter</option>
-            <option value="km">Kilometer</option>
-            <option value="inch">Inch</option>
-            <option value="foot">Foot</option>
-            <option value="yard">Yard</option>
-            <option value="mile">Mile</option>
+        <select id="to"
+                th:field="*{to}">
+
+            <option value="mg">Milligram</option>
+            <option value="g">Gram</option>
+            <option value="kg">Kilogram</option>
+            <option value="ton">Ton</option>
+            <option value="oz">Ounce</option>
+            <option value="lb">Pound</option>
+
         </select>
 
         <br><br>
@@ -70,17 +73,23 @@
 
     <br>
 
-    <!-- Result -->
-    <div class="result" th:if="${result != null}">
+    <div class="result"
+         th:if="${result != null}">
 
         <h2>Result</h2>
 
         <p>
+
             <span th:text="${request.value}"></span>
+
             <span th:text="${fromUnit}"></span>
+
             =
+
             <strong th:text="${result}"></strong>
+
             <span th:text="${toUnit}"></span>
+
         </p>
 
     </div>
