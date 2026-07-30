@@ -2,6 +2,8 @@ package com.sanskar.unitconverter.controller;
 
 import com.sanskar.unitconverter.model.LengthConversionRequest;
 import com.sanskar.unitconverter.model.WeightConversionRequest;
+import com.sanskar.unitconverter.model.TemperatureConversionRequest;
+import com.sanskar.unitconverter.model.VolumeConversionRequest;
 import com.sanskar.unitconverter.service.UnitConversionService;
 import com.sanskar.unitconverter.util.UnitFormatter;
 
@@ -11,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import com.sanskar.unitconverter.model.TemperatureConversionRequest;
+
 import java.text.DecimalFormat;
 
 @Controller
@@ -100,8 +102,8 @@ public class HomeController {
     }
 
     // ==========================
-// Temperature Converter
-// ==========================
+    // Temperature Converter
+    // ==========================
 
     @GetMapping("/temperature")
     public String temperature(Model model) {
@@ -121,8 +123,6 @@ public class HomeController {
                 request.getFrom(),
                 request.getTo());
 
-        DecimalFormat df = new DecimalFormat("#.#####");
-
         model.addAttribute("request", request);
         model.addAttribute("result", df.format(convertedValue));
 
@@ -133,5 +133,39 @@ public class HomeController {
                 UnitFormatter.format(request.getTo()));
 
         return "temperature";
+    }
+
+    // ==========================
+    // Volume Converter
+    // ==========================
+
+    @GetMapping("/volume")
+    public String volume(Model model) {
+
+        model.addAttribute("request", new VolumeConversionRequest());
+
+        return "volume";
+    }
+
+    @PostMapping("/volume")
+    public String convertVolume(
+            @ModelAttribute("request") VolumeConversionRequest request,
+            Model model) {
+
+        double convertedValue = unitConversionService.convertVolume(
+                request.getValue(),
+                request.getFrom(),
+                request.getTo());
+
+        model.addAttribute("request", request);
+        model.addAttribute("result", df.format(convertedValue));
+
+        model.addAttribute("fromUnit",
+                UnitFormatter.format(request.getFrom()));
+
+        model.addAttribute("toUnit",
+                UnitFormatter.format(request.getTo()));
+
+        return "volume";
     }
 }

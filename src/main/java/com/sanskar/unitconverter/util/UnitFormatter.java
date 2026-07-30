@@ -69,6 +69,28 @@ public class UnitFormatter {
             case "k":
                 return "K";
 
+            // ==========================
+            // Volume Units
+            // ==========================
+
+            case "ml":
+                return "Milliliter";
+
+            case "l":
+                return "Liter";
+
+            case "m3":
+                return "Cubic Meter";
+
+            case "cm3":
+                return "Cubic Centimeter";
+
+            case "gal":
+                return "US Gallon";
+
+            case "ft3":
+                return "Cubic Foot";
+
             default:
                 return unit;
         }

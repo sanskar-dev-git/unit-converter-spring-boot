@@ -156,26 +156,21 @@ public class UnitConversionService {
                                      String from,
                                      String to) {
 
-        // Same unit
-        if (from.equals(to)) {
+        if (from.equals(to))
             return value;
-        }
 
-        // Celsius
         if (from.equals("c") && to.equals("f"))
             return round((value * 9 / 5) + 32);
 
         if (from.equals("c") && to.equals("k"))
             return round(value + 273.15);
 
-        // Fahrenheit
         if (from.equals("f") && to.equals("c"))
             return round((value - 32) * 5 / 9);
 
         if (from.equals("f") && to.equals("k"))
             return round((value - 32) * 5 / 9 + 273.15);
 
-        // Kelvin
         if (from.equals("k") && to.equals("c"))
             return round(value - 273.15);
 
@@ -186,6 +181,73 @@ public class UnitConversionService {
     }
 
     // ==========================
+    // Volume Converter
+    // ==========================
+
+    public double convertVolume(double value,
+                                String from,
+                                String to) {
+
+        double litres = convertToLitres(value, from);
+
+        return round(convertFromLitres(litres, to));
+    }
+
+    private double convertToLitres(double value, String unit) {
+
+        switch (unit) {
+
+            case "ml":
+                return value / 1000;
+
+            case "l":
+                return value;
+
+            case "m3":
+                return value * 1000;
+
+            case "cm3":
+                return value / 1000;
+
+            case "gal":
+                return value * 3.78541;
+
+            case "ft3":
+                return value * 28.3168;
+
+            default:
+                throw new IllegalArgumentException("Invalid volume unit");
+        }
+    }
+
+    private double convertFromLitres(double litres, String unit) {
+
+        switch (unit) {
+
+            case "ml":
+                return litres * 1000;
+
+            case "l":
+                return litres;
+
+            case "m3":
+                return litres / 1000;
+
+            case "cm3":
+                return litres * 1000;
+
+            case "gal":
+                return litres / 3.78541;
+
+            case "ft3":
+                return litres / 28.3168;
+
+            default:
+                throw new IllegalArgumentException("Invalid volume unit");
+        }
+    }
+
+    // ==========================
     // Common Round Method
     // ==========================
 
@@ -193,5 +255,4 @@ public class UnitConversionService {
 
         return Math.round(value * 100000.0) / 100000.0;
     }
-
 }
