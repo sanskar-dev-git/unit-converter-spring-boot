@@ -142,6 +142,28 @@ public class UnitFormatter {
 
             case "knot":
                 return "Knot";
+
+            // ==========================
+// Time Units
+// ==========================
+
+            case "ms":
+                return "Millisecond";
+
+            case "sec":
+                return "Second";
+
+            case "min":
+                return "Minute";
+
+            case "hr":
+                return "Hour";
+
+            case "day":
+                return "Day";
+
+            case "week":
+                return "Week";
             default:
                 return unit;
 

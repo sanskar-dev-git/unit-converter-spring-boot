@@ -14,6 +14,7 @@ import com.sanskar.unitconverter.model.SpeedConversionRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.sanskar.unitconverter.model.TimeConversionRequest;
 
 import java.text.DecimalFormat;
 
@@ -234,5 +235,40 @@ public class HomeController {
                 UnitFormatter.format(request.getTo()));
 
         return "speed";
+    }
+    // ==========================
+// Time Converter
+// ==========================
+
+    @GetMapping("/time")
+    public String time(Model model) {
+
+        model.addAttribute("request", new TimeConversionRequest());
+
+        return "time";
+    }
+
+    @PostMapping("/time")
+    public String convertTime(
+            @ModelAttribute("request") TimeConversionRequest request,
+            Model model) {
+
+        double convertedValue = unitConversionService.convertTime(
+                request.getValue(),
+                request.getFrom(),
+                request.getTo());
+
+        model.addAttribute("request", request);
+
+        model.addAttribute("result",
+                df.format(convertedValue));
+
+        model.addAttribute("fromUnit",
+                UnitFormatter.format(request.getFrom()));
+
+        model.addAttribute("toUnit",
+                UnitFormatter.format(request.getTo()));
+
+        return "time";
     }
 }

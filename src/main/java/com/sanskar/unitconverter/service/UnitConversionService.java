@@ -403,4 +403,72 @@ public class UnitConversionService {
                 throw new IllegalArgumentException("Invalid speed unit");
         }
     }
+    // ==========================
+// Time Converter
+// ==========================
+
+    public double convertTime(double value,
+                              String from,
+                              String to) {
+
+        double seconds = convertToSeconds(value, from);
+
+        return round(convertFromSeconds(seconds, to));
+    }
+
+    private double convertToSeconds(double value,
+                                    String unit) {
+
+        switch (unit) {
+
+            case "ms":
+                return value / 1000;
+
+            case "sec":
+                return value;
+
+            case "min":
+                return value * 60;
+
+            case "hr":
+                return value * 3600;
+
+            case "day":
+                return value * 86400;
+
+            case "week":
+                return value * 604800;
+
+            default:
+                throw new IllegalArgumentException("Invalid time unit");
+        }
+    }
+
+    private double convertFromSeconds(double seconds,
+                                      String unit) {
+
+        switch (unit) {
+
+            case "ms":
+                return seconds * 1000;
+
+            case "sec":
+                return seconds;
+
+            case "min":
+                return seconds / 60;
+
+            case "hr":
+                return seconds / 3600;
+
+            case "day":
+                return seconds / 86400;
+
+            case "week":
+                return seconds / 604800;
+
+            default:
+                throw new IllegalArgumentException("Invalid time unit");
+        }
+    }
 }
