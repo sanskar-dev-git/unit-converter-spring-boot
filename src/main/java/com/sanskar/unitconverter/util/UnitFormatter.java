@@ -123,6 +123,25 @@ public class UnitFormatter {
 
             case "hectare":
                 return "Hectare";
+
+            // ==========================
+// Speed Units
+// ==========================
+
+            case "mps":
+                return "Meter/Second";
+
+            case "kmh":
+                return "Kilometer/Hour";
+
+            case "mph":
+                return "Mile/Hour";
+
+            case "fps":
+                return "Foot/Second";
+
+            case "knot":
+                return "Knot";
             default:
                 return unit;
 

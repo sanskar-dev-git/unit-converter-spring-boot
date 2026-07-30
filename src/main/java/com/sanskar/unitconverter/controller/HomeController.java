@@ -10,6 +10,7 @@ import com.sanskar.unitconverter.model.AreaConversionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import com.sanskar.unitconverter.model.SpeedConversionRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -200,5 +201,38 @@ public class HomeController {
                 UnitFormatter.format(request.getTo()));
 
         return "area";
+    }
+    // ==========================
+// Speed Converter
+// ==========================
+
+    @GetMapping("/speed")
+    public String speed(Model model) {
+
+        model.addAttribute("request", new SpeedConversionRequest());
+
+        return "speed";
+    }
+
+    @PostMapping("/speed")
+    public String convertSpeed(
+            @ModelAttribute("request") SpeedConversionRequest request,
+            Model model) {
+
+        double convertedValue = unitConversionService.convertSpeed(
+                request.getValue(),
+                request.getFrom(),
+                request.getTo());
+
+        model.addAttribute("request", request);
+        model.addAttribute("result", df.format(convertedValue));
+
+        model.addAttribute("fromUnit",
+                UnitFormatter.format(request.getFrom()));
+
+        model.addAttribute("toUnit",
+                UnitFormatter.format(request.getTo()));
+
+        return "speed";
     }
 }

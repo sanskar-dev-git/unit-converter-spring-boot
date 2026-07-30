@@ -341,4 +341,66 @@ public class UnitConversionService {
                 throw new IllegalArgumentException("Invalid area unit");
         }
     }
+    // ==========================
+// Speed Converter
+// ==========================
+
+    public double convertSpeed(double value,
+                               String from,
+                               String to) {
+
+        double metersPerSecond = convertToMetersPerSecond(value, from);
+
+        return round(convertFromMetersPerSecond(metersPerSecond, to));
+    }
+
+    private double convertToMetersPerSecond(double value,
+                                            String unit) {
+
+        switch (unit) {
+
+            case "mps":
+                return value;
+
+            case "kmh":
+                return value / 3.6;
+
+            case "mph":
+                return value * 0.44704;
+
+            case "fps":
+                return value * 0.3048;
+
+            case "knot":
+                return value * 0.514444;
+
+            default:
+                throw new IllegalArgumentException("Invalid speed unit");
+        }
+    }
+
+    private double convertFromMetersPerSecond(double metersPerSecond,
+                                              String unit) {
+
+        switch (unit) {
+
+            case "mps":
+                return metersPerSecond;
+
+            case "kmh":
+                return metersPerSecond * 3.6;
+
+            case "mph":
+                return metersPerSecond / 0.44704;
+
+            case "fps":
+                return metersPerSecond / 0.3048;
+
+            case "knot":
+                return metersPerSecond / 0.514444;
+
+            default:
+                throw new IllegalArgumentException("Invalid speed unit");
+        }
+    }
 }
