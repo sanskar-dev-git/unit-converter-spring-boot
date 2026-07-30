@@ -56,6 +56,19 @@ public class UnitFormatter {
             case "lb":
                 return "Pound";
 
+            // ==========================
+            // Temperature Units
+            // ==========================
+
+            case "c":
+                return "°C";
+
+            case "f":
+                return "°F";
+
+            case "k":
+                return "K";
+
             default:
                 return unit;
         }

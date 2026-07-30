@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import com.sanskar.unitconverter.model.TemperatureConversionRequest;
 import java.text.DecimalFormat;
 
 @Controller
@@ -97,5 +97,41 @@ public class HomeController {
                 UnitFormatter.format(request.getTo()));
 
         return "weight";
+    }
+
+    // ==========================
+// Temperature Converter
+// ==========================
+
+    @GetMapping("/temperature")
+    public String temperature(Model model) {
+
+        model.addAttribute("request", new TemperatureConversionRequest());
+
+        return "temperature";
+    }
+
+    @PostMapping("/temperature")
+    public String convertTemperature(
+            @ModelAttribute("request") TemperatureConversionRequest request,
+            Model model) {
+
+        double convertedValue = unitConversionService.convertTemperature(
+                request.getValue(),
+                request.getFrom(),
+                request.getTo());
+
+        DecimalFormat df = new DecimalFormat("#.#####");
+
+        model.addAttribute("request", request);
+        model.addAttribute("result", df.format(convertedValue));
+
+        model.addAttribute("fromUnit",
+                UnitFormatter.format(request.getFrom()));
+
+        model.addAttribute("toUnit",
+                UnitFormatter.format(request.getTo()));
+
+        return "temperature";
     }
 }

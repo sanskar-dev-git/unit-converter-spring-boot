@@ -5,19 +5,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class UnitConversionService {
 
-    public double convertingLength(double value, String from, String to){
+    // ==========================
+    // Length Converter
+    // ==========================
+
+    public double convertingLength(double value, String from, String to) {
 
         double metres = convertToMetres(value, from);
         double result = convertFromMetres(metres, to);
+
         return round(result);
     }
 
-    private double round(double value) {
-        return Math.round(value * 100000.0) / 100000.0;
-    }
-
     private double convertToMetres(double value, String unit) {
+
         switch (unit) {
+
             case "mm":
                 return value / 1000;
 
@@ -43,15 +46,16 @@ public class UnitConversionService {
                 return value * 1609.344;
 
             default:
-                throw new IllegalArgumentException("Invalid unit");
+                throw new IllegalArgumentException("Invalid length unit");
         }
     }
 
-    private double convertFromMetres(double metres, String unit){
+    private double convertFromMetres(double metres, String unit) {
 
-        switch (unit){
+        switch (unit) {
+
             case "mm":
-            return metres * 1000;
+                return metres * 1000;
 
             case "cm":
                 return metres * 100;
@@ -75,19 +79,19 @@ public class UnitConversionService {
                 return metres / 1609.344;
 
             default:
-                throw new IllegalArgumentException("Invalid Unit");
+                throw new IllegalArgumentException("Invalid length unit");
         }
     }
 
     // ==========================
-// Weight Converter
-// ==========================
+    // Weight Converter
+    // ==========================
 
     public double convertingWeight(double value, String from, String to) {
 
         double grams = convertToGrams(value, from);
 
-        return convertFromGrams(grams, to);
+        return round(convertFromGrams(grams, to));
     }
 
     private double convertToGrams(double value, String unit) {
@@ -143,5 +147,51 @@ public class UnitConversionService {
                 throw new IllegalArgumentException("Invalid weight unit");
         }
     }
-}
 
+    // ==========================
+    // Temperature Converter
+    // ==========================
+
+    public double convertTemperature(double value,
+                                     String from,
+                                     String to) {
+
+        // Same unit
+        if (from.equals(to)) {
+            return value;
+        }
+
+        // Celsius
+        if (from.equals("c") && to.equals("f"))
+            return round((value * 9 / 5) + 32);
+
+        if (from.equals("c") && to.equals("k"))
+            return round(value + 273.15);
+
+        // Fahrenheit
+        if (from.equals("f") && to.equals("c"))
+            return round((value - 32) * 5 / 9);
+
+        if (from.equals("f") && to.equals("k"))
+            return round((value - 32) * 5 / 9 + 273.15);
+
+        // Kelvin
+        if (from.equals("k") && to.equals("c"))
+            return round(value - 273.15);
+
+        if (from.equals("k") && to.equals("f"))
+            return round((value - 273.15) * 9 / 5 + 32);
+
+        throw new IllegalArgumentException("Invalid temperature unit");
+    }
+
+    // ==========================
+    // Common Round Method
+    // ==========================
+
+    private double round(double value) {
+
+        return Math.round(value * 100000.0) / 100000.0;
+    }
+
+}
