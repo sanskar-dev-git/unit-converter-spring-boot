@@ -78,5 +78,70 @@ public class UnitConversionService {
                 throw new IllegalArgumentException("Invalid Unit");
         }
     }
+
+    // ==========================
+// Weight Converter
+// ==========================
+
+    public double convertingWeight(double value, String from, String to) {
+
+        double grams = convertToGrams(value, from);
+
+        return convertFromGrams(grams, to);
+    }
+
+    private double convertToGrams(double value, String unit) {
+
+        switch (unit) {
+
+            case "mg":
+                return value / 1000;
+
+            case "g":
+                return value;
+
+            case "kg":
+                return value * 1000;
+
+            case "ton":
+                return value * 1_000_000;
+
+            case "oz":
+                return value * 28.3495;
+
+            case "lb":
+                return value * 453.592;
+
+            default:
+                throw new IllegalArgumentException("Invalid weight unit");
+        }
+    }
+
+    private double convertFromGrams(double grams, String unit) {
+
+        switch (unit) {
+
+            case "mg":
+                return grams * 1000;
+
+            case "g":
+                return grams;
+
+            case "kg":
+                return grams / 1000;
+
+            case "ton":
+                return grams / 1_000_000;
+
+            case "oz":
+                return grams / 28.3495;
+
+            case "lb":
+                return grams / 453.592;
+
+            default:
+                throw new IllegalArgumentException("Invalid weight unit");
+        }
+    }
 }
 

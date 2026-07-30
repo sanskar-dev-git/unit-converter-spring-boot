@@ -1,6 +1,7 @@
 package com.sanskar.unitconverter.controller;
 
 import com.sanskar.unitconverter.model.LengthConversionRequest;
+import com.sanskar.unitconverter.model.WeightConversionRequest;
 import com.sanskar.unitconverter.service.UnitConversionService;
 import com.sanskar.unitconverter.util.UnitFormatter;
 
@@ -11,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
-import com.sanskar.unitconverter.model.WeightConversionRequest;
 import java.text.DecimalFormat;
 
 @Controller
@@ -21,10 +20,20 @@ public class HomeController {
     @Autowired
     private UnitConversionService unitConversionService;
 
+    private final DecimalFormat df = new DecimalFormat("#.#####");
+
+    // ==========================
+    // Home Page
+    // ==========================
+
     @GetMapping("/")
     public String home() {
         return "index";
     }
+
+    // ==========================
+    // Length Converter
+    // ==========================
 
     @GetMapping("/length")
     public String length(Model model) {
@@ -44,14 +53,9 @@ public class HomeController {
                 request.getFrom(),
                 request.getTo());
 
-        DecimalFormat df = new DecimalFormat("#.#####");
-
         model.addAttribute("request", request);
-
-        // Numerical result
         model.addAttribute("result", df.format(convertedValue));
 
-        // Unit names
         model.addAttribute("fromUnit",
                 UnitFormatter.format(request.getFrom()));
 
@@ -61,10 +65,36 @@ public class HomeController {
         return "length";
     }
 
+    // ==========================
+    // Weight Converter
+    // ==========================
+
     @GetMapping("/weight")
     public String weight(Model model) {
 
         model.addAttribute("request", new WeightConversionRequest());
+
+        return "weight";
+    }
+
+    @PostMapping("/weight")
+    public String convertWeight(
+            @ModelAttribute("request") WeightConversionRequest request,
+            Model model) {
+
+        double convertedValue = unitConversionService.convertingWeight(
+                request.getValue(),
+                request.getFrom(),
+                request.getTo());
+
+        model.addAttribute("request", request);
+        model.addAttribute("result", df.format(convertedValue));
+
+        model.addAttribute("fromUnit",
+                UnitFormatter.format(request.getFrom()));
+
+        model.addAttribute("toUnit",
+                UnitFormatter.format(request.getTo()));
 
         return "weight";
     }

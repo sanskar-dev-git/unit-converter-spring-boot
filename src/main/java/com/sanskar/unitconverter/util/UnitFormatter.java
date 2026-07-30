@@ -6,6 +6,10 @@ public class UnitFormatter {
 
         switch (unit) {
 
+            // ==========================
+            // Length Units
+            // ==========================
+
             case "mm":
                 return "Millimeter";
 
@@ -29,6 +33,28 @@ public class UnitFormatter {
 
             case "mile":
                 return "Mile";
+
+            // ==========================
+            // Weight Units
+            // ==========================
+
+            case "mg":
+                return "Milligram";
+
+            case "g":
+                return "Gram";
+
+            case "kg":
+                return "Kilogram";
+
+            case "ton":
+                return "Ton";
+
+            case "oz":
+                return "Ounce";
+
+            case "lb":
+                return "Pound";
 
             default:
                 return unit;
