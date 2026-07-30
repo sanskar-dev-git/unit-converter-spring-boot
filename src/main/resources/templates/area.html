@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Area Converter</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Area Converter</h1>
+
+    <form th:action="@{/area}"
+          th:object="${request}"
+          method="post">
+
+        <label for="value">Value</label>
+
+        <input id="value"
+               type="number"
+               step="any"
+               th:field="*{value}"
+               required>
+
+        <br><br>
+
+        <label for="from">From</label>
+
+        <select id="from"
+                th:field="*{from}">
+
+            <option value="mm2">Square Millimeter</option>
+            <option value="cm2">Square Centimeter</option>
+            <option value="m2">Square Meter</option>
+            <option value="km2">Square Kilometer</option>
+            <option value="in2">Square Inch</option>
+            <option value="ft2">Square Foot</option>
+            <option value="yd2">Square Yard</option>
+            <option value="acre">Acre</option>
+            <option value="hectare">Hectare</option>
+
+        </select>
+
+        <br><br>
+
+        <label for="to">To</label>
+
+        <select id="to"
+                th:field="*{to}">
+
+            <option value="mm2">Square Millimeter</option>
+            <option value="cm2">Square Centimeter</option>
+            <option value="m2">Square Meter</option>
+            <option value="km2">Square Kilometer</option>
+            <option value="in2">Square Inch</option>
+            <option value="ft2">Square Foot</option>
+            <option value="yd2">Square Yard</option>
+            <option value="acre">Acre</option>
+            <option value="hectare">Hectare</option>
+
+        </select>
+
+        <br><br>
+
+        <button type="submit">
+            Convert
+        </button>
+
+    </form>
+
+    <br>
+
+    <div class="result"
+         th:if="${result != null}">
+
+        <h2>Result</h2>
+
+        <p>
+
+            <span th:text="${request.value}"></span>
+
+            <span th:text="${fromUnit}"></span>
+
+            =
+
+            <strong th:text="${result}"></strong>
+
+            <span th:text="${toUnit}"></span>
+
+        </p>
+
+    </div>
+
+    <br>
+
+    <a th:href="@{/}">
+        ← Back to Home
+    </a>
+
+</div>
+
+</body>
+</html>

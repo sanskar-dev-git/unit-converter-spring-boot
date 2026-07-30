@@ -6,7 +6,7 @@ import com.sanskar.unitconverter.model.TemperatureConversionRequest;
 import com.sanskar.unitconverter.model.VolumeConversionRequest;
 import com.sanskar.unitconverter.service.UnitConversionService;
 import com.sanskar.unitconverter.util.UnitFormatter;
-
+import com.sanskar.unitconverter.model.AreaConversionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -167,5 +167,38 @@ public class HomeController {
                 UnitFormatter.format(request.getTo()));
 
         return "volume";
+    }
+    // ==========================
+// Area Converter
+// ==========================
+
+    @GetMapping("/area")
+    public String area(Model model) {
+
+        model.addAttribute("request", new AreaConversionRequest());
+
+        return "area";
+    }
+
+    @PostMapping("/area")
+    public String convertArea(
+            @ModelAttribute("request") AreaConversionRequest request,
+            Model model) {
+
+        double convertedValue = unitConversionService.convertArea(
+                request.getValue(),
+                request.getFrom(),
+                request.getTo());
+
+        model.addAttribute("request", request);
+        model.addAttribute("result", df.format(convertedValue));
+
+        model.addAttribute("fromUnit",
+                UnitFormatter.format(request.getFrom()));
+
+        model.addAttribute("toUnit",
+                UnitFormatter.format(request.getTo()));
+
+        return "area";
     }
 }

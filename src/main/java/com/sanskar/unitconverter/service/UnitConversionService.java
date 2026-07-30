@@ -255,4 +255,90 @@ public class UnitConversionService {
 
         return Math.round(value * 100000.0) / 100000.0;
     }
+    // ==========================
+// Area Converter
+// ==========================
+
+    public double convertArea(double value,
+                              String from,
+                              String to) {
+
+        double squareMeters = convertToSquareMeters(value, from);
+
+        return round(convertFromSquareMeters(squareMeters, to));
+    }
+
+    private double convertToSquareMeters(double value,
+                                         String unit) {
+
+        switch (unit) {
+
+            case "mm2":
+                return value / 1_000_000;
+
+            case "cm2":
+                return value / 10_000;
+
+            case "m2":
+                return value;
+
+            case "km2":
+                return value * 1_000_000;
+
+            case "in2":
+                return value * 0.00064516;
+
+            case "ft2":
+                return value * 0.09290304;
+
+            case "yd2":
+                return value * 0.83612736;
+
+            case "acre":
+                return value * 4046.8564224;
+
+            case "hectare":
+                return value * 10000;
+
+            default:
+                throw new IllegalArgumentException("Invalid area unit");
+        }
+    }
+
+    private double convertFromSquareMeters(double squareMeters,
+                                           String unit) {
+
+        switch (unit) {
+
+            case "mm2":
+                return squareMeters * 1_000_000;
+
+            case "cm2":
+                return squareMeters * 10_000;
+
+            case "m2":
+                return squareMeters;
+
+            case "km2":
+                return squareMeters / 1_000_000;
+
+            case "in2":
+                return squareMeters / 0.00064516;
+
+            case "ft2":
+                return squareMeters / 0.09290304;
+
+            case "yd2":
+                return squareMeters / 0.83612736;
+
+            case "acre":
+                return squareMeters / 4046.8564224;
+
+            case "hectare":
+                return squareMeters / 10000;
+
+            default:
+                throw new IllegalArgumentException("Invalid area unit");
+        }
+    }
 }

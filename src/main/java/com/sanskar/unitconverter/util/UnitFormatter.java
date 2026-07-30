@@ -91,8 +91,41 @@ public class UnitFormatter {
             case "ft3":
                 return "Cubic Foot";
 
+
+
+            // ==========================
+            // Area Units
+            // ==========================
+
+            case "mm2":
+                return "Square Millimeter";
+
+            case "cm2":
+                return "Square Centimeter";
+
+            case "m2":
+                return "Square Meter";
+
+            case "km2":
+                return "Square Kilometer";
+
+            case "in2":
+                return "Square Inch";
+
+            case "ft2":
+                return "Square Foot";
+
+            case "yd2":
+                return "Square Yard";
+
+            case "acre":
+                return "Acre";
+
+            case "hectare":
+                return "Hectare";
             default:
                 return unit;
+
         }
     }
 }
