@@ -18,7 +18,7 @@ import com.sanskar.unitconverter.model.TimeConversionRequest;
 import com.sanskar.unitconverter.model.DataStorageConversionRequest;
 import com.sanskar.unitconverter.model.PressureConversionRequest;
 import com.sanskar.unitconverter.model.EnergyConversionRequest;
-
+import com.sanskar.unitconverter.model.PowerConversionRequest;
 import java.text.DecimalFormat;
 
 @Controller
@@ -376,5 +376,38 @@ public class HomeController {
                 UnitFormatter.format(request.getTo()));
 
         return "energy";
+    }
+    // ==========================
+// Power Converter
+// ==========================
+
+    @GetMapping("/power")
+    public String power(Model model) {
+
+        model.addAttribute("request", new PowerConversionRequest());
+
+        return "power";
+    }
+
+    @PostMapping("/power")
+    public String convertPower(
+            @ModelAttribute("request") PowerConversionRequest request,
+            Model model) {
+
+        double convertedValue = unitConversionService.convertPower(
+                request.getValue(),
+                request.getFrom(),
+                request.getTo());
+
+        model.addAttribute("request", request);
+        model.addAttribute("result", df.format(convertedValue));
+
+        model.addAttribute("fromUnit",
+                UnitFormatter.format(request.getFrom()));
+
+        model.addAttribute("toUnit",
+                UnitFormatter.format(request.getTo()));
+
+        return "power";
     }
 }

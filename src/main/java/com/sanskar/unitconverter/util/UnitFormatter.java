@@ -233,6 +233,25 @@ public class UnitFormatter {
 
             case "ev":
                 return "Electron Volt";
+
+            // ==========================
+// Power Units
+// ==========================
+
+            case "w":
+                return "Watt";
+
+            case "kw":
+                return "Kilowatt";
+
+            case "mw":
+                return "Megawatt";
+
+            case "hp":
+                return "Horsepower";
+
+            case "btuh":
+                return "BTU/hour";
             default:
                 return unit;
 

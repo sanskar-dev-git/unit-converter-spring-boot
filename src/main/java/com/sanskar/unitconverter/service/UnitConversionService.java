@@ -677,4 +677,62 @@ public class UnitConversionService {
                 throw new IllegalArgumentException("Invalid energy unit");
         }
     }
+    // ==========================
+// Power Converter
+// ==========================
+
+    public double convertPower(double value, String from, String to) {
+
+        double watts = convertToWatts(value, from);
+
+        return round(convertFromWatts(watts, to));
+    }
+
+    private double convertToWatts(double value, String unit) {
+
+        switch (unit) {
+
+            case "w":
+                return value;
+
+            case "kw":
+                return value * 1000;
+
+            case "mw":
+                return value * 1_000_000;
+
+            case "hp":
+                return value * 745.699872;
+
+            case "btuh":
+                return value * 0.29307107;
+
+            default:
+                throw new IllegalArgumentException("Invalid power unit");
+        }
+    }
+
+    private double convertFromWatts(double watts, String unit) {
+
+        switch (unit) {
+
+            case "w":
+                return watts;
+
+            case "kw":
+                return watts / 1000;
+
+            case "mw":
+                return watts / 1_000_000;
+
+            case "hp":
+                return watts / 745.699872;
+
+            case "btuh":
+                return watts / 0.29307107;
+
+            default:
+                throw new IllegalArgumentException("Invalid power unit");
+        }
+    }
 }
