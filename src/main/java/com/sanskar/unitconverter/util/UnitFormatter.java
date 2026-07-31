@@ -186,6 +186,28 @@ public class UnitFormatter {
 
             case "tb":
                 return "Terabyte";
+
+            // ==========================
+// Pressure Units
+// ==========================
+
+            case "pa":
+                return "Pascal";
+
+            case "kpa":
+                return "Kilopascal";
+
+            case "bar":
+                return "Bar";
+
+            case "psi":
+                return "PSI";
+
+            case "atm":
+                return "Atmosphere";
+
+            case "torr":
+                return "Torr";
             default:
                 return unit;
 

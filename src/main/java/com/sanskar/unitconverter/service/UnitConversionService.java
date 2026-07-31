@@ -539,4 +539,72 @@ public class UnitConversionService {
                 throw new IllegalArgumentException("Invalid data storage unit");
         }
     }
+    // ==========================
+// Pressure Converter
+// ==========================
+
+    public double convertPressure(double value,
+                                  String from,
+                                  String to) {
+
+        double pascal = convertToPascal(value, from);
+
+        return round(convertFromPascal(pascal, to));
+    }
+
+    private double convertToPascal(double value,
+                                   String unit) {
+
+        switch (unit) {
+
+            case "pa":
+                return value;
+
+            case "kpa":
+                return value * 1000;
+
+            case "bar":
+                return value * 100000;
+
+            case "psi":
+                return value * 6894.757;
+
+            case "atm":
+                return value * 101325;
+
+            case "torr":
+                return value * 133.322;
+
+            default:
+                throw new IllegalArgumentException("Invalid pressure unit");
+        }
+    }
+
+    private double convertFromPascal(double pascal,
+                                     String unit) {
+
+        switch (unit) {
+
+            case "pa":
+                return pascal;
+
+            case "kpa":
+                return pascal / 1000;
+
+            case "bar":
+                return pascal / 100000;
+
+            case "psi":
+                return pascal / 6894.757;
+
+            case "atm":
+                return pascal / 101325;
+
+            case "torr":
+                return pascal / 133.322;
+
+            default:
+                throw new IllegalArgumentException("Invalid pressure unit");
+        }
+    }
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.sanskar.unitconverter.model.TimeConversionRequest;
 import com.sanskar.unitconverter.model.DataStorageConversionRequest;
+import com.sanskar.unitconverter.model.PressureConversionRequest;
 
 import java.text.DecimalFormat;
 
@@ -306,5 +307,40 @@ public class HomeController {
                 UnitFormatter.format(request.getTo()));
 
         return "datastorage";
+    }
+    // ==========================
+// Pressure Converter
+// ==========================
+
+    @GetMapping("/pressure")
+    public String pressure(Model model) {
+
+        model.addAttribute("request", new PressureConversionRequest());
+
+        return "pressure";
+    }
+
+    @PostMapping("/pressure")
+    public String convertPressure(
+            @ModelAttribute("request") PressureConversionRequest request,
+            Model model) {
+
+        double convertedValue = unitConversionService.convertPressure(
+                request.getValue(),
+                request.getFrom(),
+                request.getTo());
+
+        model.addAttribute("request", request);
+
+        model.addAttribute("result",
+                df.format(convertedValue));
+
+        model.addAttribute("fromUnit",
+                UnitFormatter.format(request.getFrom()));
+
+        model.addAttribute("toUnit",
+                UnitFormatter.format(request.getTo()));
+
+        return "pressure";
     }
 }

@@ -9,7 +9,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Area Converter</title>
+    <title>Pressure Converter</title>
 
     <link rel="stylesheet"
           th:href="@{/css/style.css}">
@@ -20,9 +20,9 @@
 
 <div class="container">
 
-    <h1>Area Converter</h1>
+    <h1>Pressure Converter</h1>
 
-    <form th:action="@{/area}"
+    <form th:action="@{/pressure}"
           th:object="${request}"
           method="post">
 
@@ -41,15 +41,12 @@
         <select id="from"
                 th:field="*{from}">
 
-            <option value="mm2">Square Millimeter</option>
-            <option value="cm2">Square Centimeter</option>
-            <option value="m2">Square Meter</option>
-            <option value="km2">Square Kilometer</option>
-            <option value="in2">Square Inch</option>
-            <option value="ft2">Square Foot</option>
-            <option value="yd2">Square Yard</option>
-            <option value="acre">Acre</option>
-            <option value="hectare">Hectare</option>
+            <option value="pa">Pascal</option>
+            <option value="kpa">Kilopascal</option>
+            <option value="bar">Bar</option>
+            <option value="psi">PSI</option>
+            <option value="atm">Atmosphere</option>
+            <option value="torr">Torr</option>
 
         </select>
 
