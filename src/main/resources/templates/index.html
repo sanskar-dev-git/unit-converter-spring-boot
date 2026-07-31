@@ -3,61 +3,101 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport"
-    content="width=device-width, initial-scale=1.0">
+          content="width=device-width, initial-scale=1.0">
 
     <title>Unit Converter</title>
+
     <link rel="stylesheet"
           th:href="@{/css/style.css}">
+
 </head>
+
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>Unit Converter</h1>
-        <p>
-            Convert between different units quickly and accurately.
-        </p>
+    <h1>🚀 Unit Converter</h1>
 
-        <div class="menu">
+    <p>
+        Convert between different units quickly and accurately.
+    </p>
 
-            <a th:href="@{length}">
-                Length Converter
-            </a>
-            <a th:href="@{/weight}">
-                Weight Converter
-            </a>
-            <a th:href="@{/temperature}">
-                🌡 Temperature Converter
-            </a>
-            <a th:href="@{/volume}">
-                🧪 Volume Converter
-            </a>
-            <a th:href="@{/area}">
-                🏞️ Area Converter
-            </a>
-            <a th:href="@{/speed}">
-                🚗 Speed Converter
-            </a>
-            <a th:href="@{/time}">
-                ⏰ Time Converter
-            </a>
-            <a th:href="@{/datastorage}">
-                💾 Data Storage Converter
-            </a>
-            <a th:href="@{/pressure}">
-                🌪️ Pressure Converter
-            </a>
-            <a th:href="@{/energy}">
-                ⚡ Energy Converter
-            </a>
-            <a th:href="@{/power}">
-                ⚡ Power Converter
-            </a>
-        </div>
+    <div class="menu-grid">
+
+        <a class="converter-card" th:href="@{/length}">
+            <div class="icon">📏</div>
+            <h3>Length</h3>
+            <p>Metric & Imperial units</p>
+        </a>
+
+        <a class="converter-card" th:href="@{/weight}">
+            <div class="icon">⚖️</div>
+            <h3>Weight</h3>
+            <p>Mass conversions</p>
+        </a>
+
+        <a class="converter-card" th:href="@{/temperature}">
+            <div class="icon">🌡️</div>
+            <h3>Temperature</h3>
+            <p>Celsius, Fahrenheit & Kelvin</p>
+        </a>
+
+        <a class="converter-card" th:href="@{/volume}">
+            <div class="icon">🧪</div>
+            <h3>Volume</h3>
+            <p>Liquid measurements</p>
+        </a>
+
+        <a class="converter-card" th:href="@{/area}">
+            <div class="icon">🏞️</div>
+            <h3>Area</h3>
+            <p>Land & Surface units</p>
+        </a>
+
+        <a class="converter-card" th:href="@{/speed}">
+            <div class="icon">🚗</div>
+            <h3>Speed</h3>
+            <p>Travel speed units</p>
+        </a>
+
+        <a class="converter-card" th:href="@{/time}">
+            <div class="icon">⏰</div>
+            <h3>Time</h3>
+            <p>Seconds to years</p>
+        </a>
+
+        <a class="converter-card" th:href="@{/datastorage}">
+            <div class="icon">💾</div>
+            <h3>Data Storage</h3>
+            <p>Digital storage units</p>
+        </a>
+
+        <a class="converter-card" th:href="@{/pressure}">
+            <div class="icon">🌪️</div>
+            <h3>Pressure</h3>
+            <p>Engineering units</p>
+        </a>
+
+        <a class="converter-card" th:href="@{/energy}">
+            <div class="icon">⚡</div>
+            <h3>Energy</h3>
+            <p>Joule, Calorie & BTU</p>
+        </a>
+
+        <a class="converter-card" th:href="@{/power}">
+            <div class="icon">🔋</div>
+            <h3>Power</h3>
+            <p>Watt & Horsepower</p>
+        </a>
+
     </div>
 
+</div>
 
 </body>
+
 </html>
