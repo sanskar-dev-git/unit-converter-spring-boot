@@ -208,6 +208,31 @@ public class UnitFormatter {
 
             case "torr":
                 return "Torr";
+
+            // ==========================
+// Energy Units
+// ==========================
+
+            case "j":
+                return "Joule";
+
+            case "kj":
+                return "Kilojoule";
+
+            case "cal":
+                return "Calorie";
+
+            case "kcal":
+                return "Kilocalorie";
+
+            case "wh":
+                return "Watt-hour";
+
+            case "kwh":
+                return "Kilowatt-hour";
+
+            case "ev":
+                return "Electron Volt";
             default:
                 return unit;
 

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.sanskar.unitconverter.model.TimeConversionRequest;
 import com.sanskar.unitconverter.model.DataStorageConversionRequest;
 import com.sanskar.unitconverter.model.PressureConversionRequest;
+import com.sanskar.unitconverter.model.EnergyConversionRequest;
 
 import java.text.DecimalFormat;
 
@@ -342,5 +343,38 @@ public class HomeController {
                 UnitFormatter.format(request.getTo()));
 
         return "pressure";
+    }
+    // ==========================
+// Energy Converter
+// ==========================
+
+    @GetMapping("/energy")
+    public String energy(Model model) {
+
+        model.addAttribute("request", new EnergyConversionRequest());
+
+        return "energy";
+    }
+
+    @PostMapping("/energy")
+    public String convertEnergy(
+            @ModelAttribute("request") EnergyConversionRequest request,
+            Model model) {
+
+        double convertedValue = unitConversionService.convertEnergy(
+                request.getValue(),
+                request.getFrom(),
+                request.getTo());
+
+        model.addAttribute("request", request);
+        model.addAttribute("result", df.format(convertedValue));
+
+        model.addAttribute("fromUnit",
+                UnitFormatter.format(request.getFrom()));
+
+        model.addAttribute("toUnit",
+                UnitFormatter.format(request.getTo()));
+
+        return "energy";
     }
 }

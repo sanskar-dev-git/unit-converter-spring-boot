@@ -607,4 +607,74 @@ public class UnitConversionService {
                 throw new IllegalArgumentException("Invalid pressure unit");
         }
     }
+    // ==========================
+// Energy Converter
+// ==========================
+
+    public double convertEnergy(double value, String from, String to) {
+
+        double joules = convertToJoules(value, from);
+
+        return round(convertFromJoules(joules, to));
+    }
+
+    private double convertToJoules(double value, String unit) {
+
+        switch (unit) {
+
+            case "j":
+                return value;
+
+            case "kj":
+                return value * 1000;
+
+            case "cal":
+                return value * 4.184;
+
+            case "kcal":
+                return value * 4184;
+
+            case "wh":
+                return value * 3600;
+
+            case "kwh":
+                return value * 3_600_000;
+
+            case "ev":
+                return value * 1.602176634E-19;
+
+            default:
+                throw new IllegalArgumentException("Invalid energy unit");
+        }
+    }
+
+    private double convertFromJoules(double joules, String unit) {
+
+        switch (unit) {
+
+            case "j":
+                return joules;
+
+            case "kj":
+                return joules / 1000;
+
+            case "cal":
+                return joules / 4.184;
+
+            case "kcal":
+                return joules / 4184;
+
+            case "wh":
+                return joules / 3600;
+
+            case "kwh":
+                return joules / 3_600_000;
+
+            case "ev":
+                return joules / 1.602176634E-19;
+
+            default:
+                throw new IllegalArgumentException("Invalid energy unit");
+        }
+    }
 }

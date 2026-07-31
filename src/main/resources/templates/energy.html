@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Energy Converter</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Energy Converter</h1>
+
+    <form th:action="@{/energy}"
+          th:object="${request}"
+          method="post">
+
+        <label for="value">Value</label>
+
+        <input id="value"
+               type="number"
+               step="any"
+               th:field="*{value}"
+               required>
+
+        <br><br>
+
+        <label for="from">From</label>
+
+        <select id="from"
+                th:field="*{from}">
+
+            <option value="j">Joule</option>
+            <option value="kj">Kilojoule</option>
+            <option value="cal">Calorie</option>
+            <option value="kcal">Kilocalorie</option>
+            <option value="wh">Watt-hour</option>
+            <option value="kwh">Kilowatt-hour</option>
+            <option value="ev">Electron Volt</option>
+
+        </select>
+
+        <br><br>
+
+        <label for="to">To</label>
+
+        <select id="to"
+                th:field="*{to}">
+
+            <option value="j">Joule</option>
+            <option value="kj">Kilojoule</option>
+            <option value="cal">Calorie</option>
+            <option value="kcal">Kilocalorie</option>
+            <option value="wh">Watt-hour</option>
+            <option value="kwh">Kilowatt-hour</option>
+            <option value="ev">Electron Volt</option>
+
+        </select>
+
+        <br><br>
+
+        <button type="submit">
+            Convert
+        </button>
+
+    </form>
+
+    <br>
+
+    <div class="result"
+         th:if="${result != null}">
+
+        <h2>Result</h2>
+
+        <p>
+
+            <span th:text="${request.value}"></span>
+
+            <span th:text="${fromUnit}"></span>
+
+            =
+
+            <strong th:text="${result}"></strong>
+
+            <span th:text="${toUnit}"></span>
+
+        </p>
+
+    </div>
+
+    <br>
+
+    <a th:href="@{/}">
+        ← Back to Home
+    </a>
+
+</div>
+
+</body>
+</html>
