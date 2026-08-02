@@ -1,31 +1,41 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unit Converter</title>
 
-    <link rel="stylesheet"
-          th:href="@{/css/style.css}">
+    <!-- 1. Instant Theme Load Script (Prevents Light/Dark Flicker) -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
 
+    <!-- Spring Boot Static Resource Mapping -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
 
 <div class="container">
 
-    <h1>🚀 Unit Converter</h1>
+    <!-- Header & Dark/Light Mode Switch -->
+    <div class="header-wrapper">
+        <div>
+            <h1>🚀 Unit Converter</h1>
+            <p>Convert between different units quickly and accurately.</p>
+        </div>
 
-    <p>
-        Convert between different units quickly and accurately.
-    </p>
+        <button id="themeToggle" class="theme-toggle-btn" type="button">
+            <span id="themeIcon">🌙</span>
+            <span id="themeText">Dark Mode</span>
+        </button>
+    </div>
 
+    <!-- Converter Cards Grid -->
     <div class="menu-grid">
 
         <a class="converter-card" th:href="@{/length}">
@@ -98,6 +108,36 @@
 
 </div>
 
-</body>
+<!-- Theme Switcher Script -->
+<script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
 
+    // Read current theme set by the head script
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    updateToggleUI(currentTheme);
+
+    // Event listener to switch themes
+    toggleBtn.addEventListener('click', () => {
+        const activeTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = activeTheme === 'light' ? 'dark' : 'light';
+
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateToggleUI(newTheme);
+    });
+
+    function updateToggleUI(theme) {
+        if (theme === 'light') {
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Light Mode';
+        } else {
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'Dark Mode';
+        }
+    }
+</script>
+
+</body>
 </html>

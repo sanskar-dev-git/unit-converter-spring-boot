@@ -1,97 +1,131 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Length Converter</title>
 
-    <link rel="stylesheet"
-          th:href="@{/css/style.css}">
+    <!-- Instant Theme Load Script (Prevents Dark/Light Flicker) -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
 
-<div class="container">
+<div class="container subpage-container">
 
-    <h1>Length Converter</h1>
+    <!-- Header & Navigation -->
+    <div class="header-wrapper">
+        <div>
+            <a th:href="@{/}" class="back-link">← Back to Home</a>
+            <h1>📏 Length Converter</h1>
+        </div>
 
-    <form th:action="@{/length}"
-          th:object="${request}"
-          method="post">
+        <button id="themeToggle" class="theme-toggle-btn" type="button">
+            <span id="themeIcon">🌙</span>
+            <span id="themeText">Dark Mode</span>
+        </button>
+    </div>
 
-        <label for="value">Value</label>
-        <input
-                id="value"
-                type="number"
-                th:field="*{value}"
-                step="any"
-                required>
+    <!-- Converter Form -->
+    <form th:action="@{/length}" th:object="${request}" method="post" class="converter-form">
 
-        <br><br>
+        <div class="form-group">
+            <label for="value">Value</label>
+            <input id="value"
+                   type="number"
+                   step="any"
+                   th:field="*{value}"
+                   placeholder="Enter value..."
+                   required
+                   class="form-input">
+        </div>
 
-        <label for="from">From</label>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="from">From</label>
+                <select id="from" th:field="*{from}" class="form-select">
+                    <option value="mm">Millimeter (mm)</option>
+                    <option value="cm">Centimeter (cm)</option>
+                    <option value="m">Meter (m)</option>
+                    <option value="km">Kilometer (km)</option>
+                    <option value="inch">Inch (in)</option>
+                    <option value="foot">Foot (ft)</option>
+                    <option value="yard">Yard (yd)</option>
+                    <option value="mile">Mile (mi)</option>
+                </select>
+            </div>
 
-        <select id="from" th:field="*{from}">
-            <option value="mm">Millimeter</option>
-            <option value="cm">Centimeter</option>
-            <option value="m">Meter</option>
-            <option value="km">Kilometer</option>
-            <option value="inch">Inch</option>
-            <option value="foot">Foot</option>
-            <option value="yard">Yard</option>
-            <option value="mile">Mile</option>
-        </select>
+            <div class="form-group">
+                <label for="to">To</label>
+                <select id="to" th:field="*{to}" class="form-select">
+                    <option value="mm">Millimeter (mm)</option>
+                    <option value="cm">Centimeter (cm)</option>
+                    <option value="m">Meter (m)</option>
+                    <option value="km">Kilometer (km)</option>
+                    <option value="inch">Inch (in)</option>
+                    <option value="foot">Foot (ft)</option>
+                    <option value="yard">Yard (yd)</option>
+                    <option value="mile">Mile (mi)</option>
+                </select>
+            </div>
+        </div>
 
-        <br><br>
-
-        <label for="to">To</label>
-
-        <select id="to" th:field="*{to}">
-            <option value="mm">Millimeter</option>
-            <option value="cm">Centimeter</option>
-            <option value="m">Meter</option>
-            <option value="km">Kilometer</option>
-            <option value="inch">Inch</option>
-            <option value="foot">Foot</option>
-            <option value="yard">Yard</option>
-            <option value="mile">Mile</option>
-        </select>
-
-        <br><br>
-
-        <button type="submit">
-            Convert
+        <button type="submit" class="submit-btn">
+            Convert Units
         </button>
 
     </form>
 
-    <br>
-
-    <!-- Result -->
-    <div class="result" th:if="${result != null}">
-
+    <!-- Calculation Result Display -->
+    <div class="result-card" th:if="${result != null}">
         <h2>Result</h2>
-
-        <p>
+        <p class="result-text">
             <span th:text="${request.value}"></span>
             <span th:text="${fromUnit}"></span>
-            =
+            <span class="equals-sign">=</span>
             <strong th:text="${result}"></strong>
             <span th:text="${toUnit}"></span>
         </p>
-
     </div>
 
-    <br>
-
-    <a th:href="@{/}">
-        ← Back to Home
-    </a>
-
 </div>
+
+<!-- Theme Switcher Script -->
+<script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    updateToggleUI(currentTheme);
+
+    toggleBtn.addEventListener('click', () => {
+        const activeTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = activeTheme === 'light' ? 'dark' : 'light';
+
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateToggleUI(newTheme);
+    });
+
+    function updateToggleUI(theme) {
+        if (theme === 'light') {
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Light Mode';
+        } else {
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'Dark Mode';
+        }
+    }
+</script>
 
 </body>
 </html>
