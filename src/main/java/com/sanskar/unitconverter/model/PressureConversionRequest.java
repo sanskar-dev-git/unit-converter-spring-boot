@@ -2,7 +2,7 @@ package com.sanskar.unitconverter.model;
 
 public class PressureConversionRequest {
 
-    private double value;
+    private Double value = null;
 
     private String from;
 
@@ -11,11 +11,11 @@ public class PressureConversionRequest {
     public PressureConversionRequest() {
     }
 
-    public double getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

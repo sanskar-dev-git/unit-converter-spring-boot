@@ -2,7 +2,7 @@ package com.sanskar.unitconverter.model;
 
 public class TimeConversionRequest {
 
-    private double value;
+    private Double value = null;
 
     private String from;
 
@@ -11,11 +11,11 @@ public class TimeConversionRequest {
     public TimeConversionRequest() {
     }
 
-    public double getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 
